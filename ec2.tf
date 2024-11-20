@@ -2,7 +2,7 @@ terraform {
   backend "remote" {
     organization = "emander-org"
     workspaces {
-      name = "cli-based-workspace"
+      name = "emander-vpn"
     }
   }
 }

@@ -23,7 +23,7 @@ jobs:
         id: aws-creds
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume: arn:aws:iam::730335337132:role/emander-role
+          role-to-assume: arn:aws:iam::730335337132:role/vpn-edangla-role
           aws-region: "ca-central-1"
 
       # Step 3: Install Terraform CLI

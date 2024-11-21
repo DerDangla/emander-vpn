@@ -18,13 +18,6 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Debug OIDC Token
-        run: |
-          echo "Retrieving OIDC token..."
-          curl -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
-               "$ACTIONS_ID_TOKEN_REQUEST_URL" > oidc-token.json
-          cat oidc-token.json
-
       # Step 2: Configure AWS credentials with Assume Role
       - name: Configure AWS Credentials
         id: aws-creds
@@ -42,6 +35,8 @@ jobs:
       # Step 4: Initialize Terraform with Terraform Cloud backend
       - name: Terraform Init
         run: terraform init
+        env:
+          TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
 
       # Step 5: Terraform Plan
       - name: Terraform Plan
@@ -50,5 +45,3 @@ jobs:
       # Step 6: Terraform Apply (Auto-approve)
       - name: Terraform Apply
         run: terraform apply -auto-approve tfplan
-        env:
-          TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}

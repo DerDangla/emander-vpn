@@ -16,12 +16,8 @@ terraform {
 }
 
 provider "aws" {
-  region  = "ca-central-1"
-  profile = "source"
-
-  assume_role {
-    role_arn = "arn:aws:iam::730335337132:role/vpn-edangla-role"
-  }
+  region = "ca-central-1"
+  alias  = "ca-central-1"
 }
 
 resource "aws_key_pair" "deployer" {

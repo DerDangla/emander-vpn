@@ -1,4 +1,4 @@
-name: "Terraform Auto Apply"
+name: "Terraform Deploy"
 
 on:
   push:
@@ -24,7 +24,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v3
         with:
           role-to-assume: arn:aws:iam::730335337132:role/vpn-edangla-role
-          aws-region: "ca-central-1"
+          aws-region: ca-central-1
 
       # Step 3: Install Terraform CLI
       - name: Setup Terraform
@@ -34,18 +34,19 @@ jobs:
 
       # Step 4: Initialize Terraform with Terraform Cloud backend
       - name: Terraform Init
+        env:
+          TF_CLOUD_ORGANIZATION: emander-org
+          TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
         run: terraform init
-        env:
-          TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
 
-      # Step 5: Terraform Plan
       - name: Terraform Plan
-        run: terraform plan -out=tfplan
         env:
+          TF_CLOUD_ORGANIZATION: emander-org
           TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+        run: terraform plan
 
-      # Step 6: Terraform Apply (Auto-approve)
       - name: Terraform Apply
-        run: terraform apply -auto-approve tfplan
         env:
+          TF_CLOUD_ORGANIZATION: emander-org
           TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+        run: terraform apply -auto-approve

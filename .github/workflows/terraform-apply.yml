@@ -14,11 +14,9 @@ jobs:
     name: Terraform Plan and Apply
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Checkout the code
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Step 2: Configure AWS credentials with Assume Role
       - name: Configure AWS Credentials
         id: aws-creds
         uses: aws-actions/configure-aws-credentials@v3
@@ -26,13 +24,11 @@ jobs:
           role-to-assume: arn:aws:iam::730335337132:role/vpn-edangla-role
           aws-region: ca-central-1
 
-      # Step 3: Install Terraform CLI
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
+        uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.9.5
 
-      # Step 4: Initialize Terraform with Terraform Cloud backend
       - name: Terraform Init
         env:
           TF_CLOUD_ORGANIZATION: emander-org

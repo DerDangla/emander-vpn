@@ -1,5 +1,6 @@
 terraform {
   backend "remote" {
+    hostname     = "app.terraform.io"
     organization = "emander-org"
     workspaces {
       name = "emander-vpn"

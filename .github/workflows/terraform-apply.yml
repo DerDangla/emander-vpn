@@ -41,7 +41,11 @@ jobs:
       # Step 5: Terraform Plan
       - name: Terraform Plan
         run: terraform plan -out=tfplan
+        env:
+          TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
 
       # Step 6: Terraform Apply (Auto-approve)
       - name: Terraform Apply
         run: terraform apply -auto-approve tfplan
+        env:
+          TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}

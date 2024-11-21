@@ -20,7 +20,7 @@ provider "aws" {
   profile = "source"
 
   assume_role {
-    role_arn = "<ROLE_ARN>"
+    role_arn = "arn:aws:iam::730335337132:role/vpn-edangla-role"
   }
 }
 

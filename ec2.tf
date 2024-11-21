@@ -6,11 +6,12 @@ terraform {
     }
   }
 
-  backend "remote" {
-    organization = "emander-org"
-    workspaces {
-      name = "emander-vpn"
-    }
+  backend "s3" {
+    bucket         = "emander-vpn-tf-state"
+    key            = "terraform.tfstate"
+    region         = "ca-central-1"
+    encrypt        = true
+    dynamodb_table = "emander-vpn-tf-state-lock"
   }
 }
 

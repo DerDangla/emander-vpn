@@ -1,5 +1,5 @@
 resource "aws_instance" "emander-instance" {
-  ami           = "ami-0a14a0a5716389b2d"
+  ami           = "ami-0bcda2433f3dabc41"
   instance_type = "t2.micro"
   key_name      = aws_key_pair.emander-key.key_name
 

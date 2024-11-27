@@ -1,9 +1,6 @@
 name: "Terraform Auto Apply"
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
   
 permissions:
@@ -36,12 +33,4 @@ jobs:
 
       # Step 4: Initialize Terraform with Terraform Cloud backend
       - name: Terraform Init
-        run: terraform init
-
-      # Step 5: Terraform Plan
-      - name: Terraform Plan
-        run: terraform plan -out=tfplan
-
-      # Step 6: Terraform Apply (Auto-approve)
-      - name: Terraform Apply
-        run: terraform apply -auto-approve tfplan
+        run: aws secretsmanager cancel-secret-deletion --secret-id myapp-dev
